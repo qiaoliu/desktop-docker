@@ -27,6 +27,8 @@ chown -R docker:docker /home/docker/*
 /usr/sbin/sshd -D
 
 if [ -d "$HOME/.rbenv" ]; then
+	echo "installed !!!"
+else
 	git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
 	echo "export PATH=\"$HOME/.rbenv/bin:$PATH\"" > ~/.bashrc
 	echo "eval \"$(rbenv init -)\"" > ~/.bashrc
