@@ -20,18 +20,13 @@ cd /src; tar -C /home/docker -xvf config.tar
 #Set all the files and subdirectories from /home/docker with docker permissions. 
 chown -R docker:docker /home/docker/*
 
-# restarts the xdm service
-/etc/init.d/xdm restart
-
-# Start the ssh service
-/usr/sbin/sshd -D
 
 if [ -d "$HOME/.rbenv" ]; then
 	echo "installed !!!"
 else
 	git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
-	echo "export PATH=\"$HOME/.rbenv/bin:$PATH\"" > ~/.bashrc
-	echo "eval \"$(rbenv init -)\"" > ~/.bashrc
+	echo "export PATH=\"$HOME/.rbenv/bin:$PATH\"" >> ~/.bashrc
+	echo "eval \"\$(rbenv init -)\"" >> ~/.bashrc
 
 	git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 
@@ -40,3 +35,11 @@ else
 	rbenv rehash
 	rbenv global 2.0.0-p247
 fi
+
+# restarts the xdm service
+/etc/init.d/xdm restart
+
+# Start the ssh service
+/usr/sbin/sshd -D
+
+
