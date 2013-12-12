@@ -67,7 +67,7 @@ RUN echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh
 RUN chmod +x /etc/profile.d/rbenv.sh
 
 # install ruby-build
-RUN mkdir /usr/local/rbenv/plugins
+RUN mkdir -p /usr/local/rbenv/plugins
 RUN git clone https://github.com/sstephenson/ruby-build.git /usr/local/rbenv/plugins/ruby-build
 #  
 ENV RBENV_ROOT /usr/local/rbenv
