@@ -60,7 +60,6 @@ RUN git clone https://github.com/sstephenson/rbenv.git /home/docker/.rbenv
 RUN echo "export PATH=\"$HOME/.rbenv/bin:$PATH\"" >> /home/docker/.bashrc
 RUN echo "eval \"\$(rbenv init -)\"" >> home/docker/.bashrc
 RUN git clone https://github.com/sstephenson/ruby-build.git /home/docker/.rbenv/plugins/ruby-build
-RUN source /home/docker/.bashrc
 RUN /home/docker/.rbenv/bin/rbenv install 2.0.0-p247
 RUN /home/docker/.rbenv/bin/rbenv rehash
 RUN /home/docker/.rbenv/bin/rbenv global 2.0.0-p247
