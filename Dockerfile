@@ -72,13 +72,12 @@ RUN git clone https://github.com/sstephenson/ruby-build.git /usr/local/rbenv/plu
 #  
 ENV RBENV_ROOT /usr/local/rbenv
 #   
-ENV PATH "$RBENV_ROOT/bin:$RBENV_ROOT/shims:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+ENV PATH "$RBENV_ROOT/bin:$RBENV_ROOT/docker:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 # does not work. PATH is set to
 # $RBENV_ROOT/shims:$RBENV_ROOT/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 # install ruby2
-RUN rbenv install 2.0.0-p247
-
+RUN . ~/.bashrc && rbenv install 2.0.0-p247
 
 
 # Copy the files into the container
