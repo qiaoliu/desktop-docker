@@ -3,6 +3,7 @@
 # Create the directory needed to run the sshd daemon
 mkdir /var/run/sshd 
 
+mkdir /home/docker
 # Add docker user and generate a random password with 12 characters that includes at least one capital letter and number.
 DOCKER_PASSWORD=`pwgen -c -n -1 12`
 echo User: docker Password: $DOCKER_PASSWORD

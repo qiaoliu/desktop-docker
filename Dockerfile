@@ -53,16 +53,32 @@ RUN apt-get install -y firefox xterm ubuntu-restricted-extras
 # Set locale (fix the locale warnings)
 RUN localedef -v -c -i en_US -f UTF-8 en_US.UTF-8 || :
 
-RUN mkdir /home/docker
 
-# install ruby env 
-RUN git clone https://github.com/sstephenson/rbenv.git /home/docker/.rbenv
-RUN echo "export PATH=\"$HOME/.rbenv/bin:$PATH\"" >> /home/docker/.bashrc
-RUN echo "eval \"\$(rbenv init -)\"" >> home/docker/.bashrc
-RUN git clone https://github.com/sstephenson/ruby-build.git /home/docker/.rbenv/plugins/ruby-build
-RUN /home/docker/.rbenv/bin/rbenv install 2.0.0-p247
-RUN /home/docker/.rbenv/bin/rbenv rehash
-RUN /home/docker/.rbenv/bin/rbenv global 2.0.0-p247
+
+
+
+#install Ruby env 
+
+UN git clone https://github.com/sstephenson/rbenv.git /usr/local/rbenv
+RUN echo '# rbenv setup' > /etc/profile.d/rbenv.sh
+RUN echo 'export RBENV_ROOT=/usr/local/rbenv' >> /etc/profile.d/rbenv.sh
+RUN echo 'export PATH="$RBENV_ROOT/bin:$PATH"' >> /etc/profile.d/rbenv.sh
+RUN echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh
+RUN chmod +x /etc/profile.d/rbenv.sh
+
+# install ruby-build
+RUN mkdir /usr/local/rbenv/plugins
+RUN git clone https://github.com/sstephenson/ruby-build.git /usr/local/rbenv/plugins/ruby-build
+#  
+ENV RBENV_ROOT /usr/local/rbenv
+#   
+ENV PATH "$RBENV_ROOT/bin:$RBENV_ROOT/shims:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+# does not work. PATH is set to
+# $RBENV_ROOT/shims:$RBENV_ROOT/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# install ruby2
+RUN rbenv install 2.0.0-p247
+
 
 
 # Copy the files into the container
